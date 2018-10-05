@@ -833,6 +833,9 @@ regexp_set_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 
     RE2::Options options;
     options.set_log_errors(false);
+    options.set_max_mem(8<<24); // <= (default: 8<<20)
+    options.set_never_capture(true); // <= (default: false)
+    options.set_case_sensitive(false); // <= (default: true)
 
     self->re2_set_obj = new(nothrow) RE2::Set(options, (RE2::Anchor)anchoring);
 
